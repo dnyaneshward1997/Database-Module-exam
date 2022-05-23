@@ -1,0 +1,146 @@
+Section 1
+
+question 1
+
+create table DEPT(
+DEPTNO INT,
+DNAME VARCHAR(15),
+LOC VARCHAR (10)
+);
+DESC DEPT;
+INSERT INTO DEPT values
+('10', 'ACCOUNTING', 'NEW YORK'),
+('20', 'REASEARCH', 'DALLAS'),
+('30', 'SALES', 'CHICAGO'),
+('40', 'OPERATIONS', 'BOSTON');
+
+select * from dept;
+
+QUESTION 2
+
+create table emp(
+EMPNO INT(4),
+ENAME VARCHAR(10),
+JOB VARCHAR(10),
+HIREDATE date,
+SAL FLOAT(7,2),
+COMM FLOAT(7,2),
+DEPTNO INT(2)
+);
+
+DESC EMP;
+
+INSERT INTO EMP VALUES
+(7839, 'KING', 'MANAGER', '1991-11-17', 5000, NULL, 10),
+(7698,'BLAKE', 'CLERK', '1981-05-01', 2850, NULL, 30),
+(7698,'CLARK', 'MANAGER', '1981-06-09', 2450, NULL, 10),
+(7698,'JONES ', 'CLERK', '1981-04-02', 2975, NULL, 20),
+(7698,'JONES ', 'SALESMAN', '1981-09-28', 1250, NULL, 30),
+(7698,'JONES ', 'SALESMAN', ' 1981-02-20', 1600, NULL, 30);
+
+SELECT * FROM EMP;
+
+
+Q 3
+
+SELECT ENAME FROM emp
+WHERE SAL BETWEEN 2500 AND 5000;
+
+Q4
+
+SELECT ENAME FROM emp
+ORDER BY ENAME DESC;
+
+
+Q5
+
+SELECT LOWER(JOB) FROM EMP;
+
+
+Q6
+
+SELECT ENAME , LENGTH(ENAME) FROM EMP;
+
+
+Q7
+
+SELECT DEPTNO, COUNT(*) FROM emp
+GROUP BY DEPTNO;
+
+Q8
+
+
+Q9
+Q10
+
+SELECT SAL,SAL*0.2 "HRA" FROM EMP;
+
+
+===========================================================
+
+
+SECTION 2
+
+Q1
+
+CREATE TABLE TEMPP(
+ STRING_1 VARCHAR(250),
+ STRING_2 VARCHAR(250),
+ MASS VARCHAR(200)
+);
+
+DESC TEMPP;
+
+delimiter //
+
+ create procedure PROC1(STRING_1 VARCHAR(250), STRING_2 VARCHAR(250))
+ begin
+ declare MASS VARCHAR(200);
+ declare number int;
+ select locate( STRING_1, STRING_2 ) into number;
+ 
+ if number>0 then
+     insert into tempp values 
+     (STRING_1,STRING_2, 'STRING_1 exits in STRING_2');
+     
+else
+    insert into tempp values 
+     (STRING_1,STRING_2, 'STRING_1 not exitsin STRING_2');
+     
+end if;
+
+end;//
+delimiter ;
+
+
+/*call PROC1(255, 2550);*/
+
+
+select * from tempp;
+     
+
+Q2
+
+drop table tempp;
+
+
+delimiter //
+
+create function FUNC1(side_1 int , side_2 int, side_3 int)
+returns varchar(100)
+deterministic
+
+begin
+if 
+  side_1 + side_2 > side_3 and side_2 + side_3 > side_1 and side_1 + side_3 > side_2 then
+  return 'TRUE';
+  
+else
+  return 'FALSE';
+  
+  end if;
+  
+end; //
+
+delimiter ;
+delimiter //
